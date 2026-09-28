@@ -3,33 +3,6 @@ Laboratorio 7 - Teoria de la computacion
 Ejercicio 1: Carga de gramaticas, validacion de producciones mediante
 expresiones regulares, y eliminacion de producciones-epsilon.
 
-Uso:
-    python grammar_simplifier.py [archivo1.txt archivo2.txt ...]
-
-Si no se pasan argumentos, se procesan por defecto:
-    grammars/grammar1.txt
-    grammars/grammar2.txt
-
-Formato esperado de cada linea del archivo de gramatica:
-    <NO_TERMINAL> -> <cuerpo1> | <cuerpo2> | ...
-
-Donde:
-    - <NO_TERMINAL> es una unica letra mayuscula (A-Z).
-    - "->" separa el no-terminal de sus producciones.
-    - Cada <cuerpo> es una concatenacion de simbolos (letras mayusculas
-      para no-terminales, letras minusculas/digitos para terminales),
-      o bien la palabra "epsilon" (o el simbolo "e") para representar
-      la cadena vacia.
-    - Los distintos cuerpos de produccion para el mismo no-terminal se
-      separan con el operador OR "|".
-
-Ejemplo valido:
-    S -> 0A0 | 1B1 | BB
-
-Ejemplo invalido (detiene la ejecucion):
-    s -> 0a0 | 1B1      (no-terminal en minuscula)
-    S --> 0A0           (flecha mal escrita)
-    S -> 0A0 |          (cuerpo vacio tras el OR)
 """
 
 import sys
@@ -64,8 +37,6 @@ def validate_line(line, line_number, source):
 
 
 def parse_line(line):
-    """Convierte una linea ya validada en (no_terminal, lista_de_cuerpos).
-    Cada cuerpo es una tupla de simbolos; la tupla vacia () representa epsilon."""
     lhs, rhs = line.split("->", 1)
     lhs = lhs.strip()
     bodies = []
@@ -79,9 +50,6 @@ def parse_line(line):
 
 
 def load_grammar_file(path):
-    """Carga y valida un archivo de gramatica linea por linea.
-    Retorna un diccionario {no_terminal: [cuerpos...]} y detiene la
-    ejecucion si alguna linea esta mal escrita."""
     productions = defaultdict(list)
     order = []
 

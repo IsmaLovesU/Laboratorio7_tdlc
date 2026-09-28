@@ -74,4 +74,4 @@ D -> A | B | ab
 
 ### Video de demostracion
 
-[Pendiente: agregar enlace al video de YouTube (no listado)]
+https://youtu.be/rJ-feKh9PAY
